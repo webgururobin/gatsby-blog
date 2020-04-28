@@ -4,16 +4,19 @@ import { Link } from "gatsby"
 // Hooks
 import { useSiteConfigQuery } from "hooks/useSiteConfigQuery"
 
+// Styles
+import { Wrapper, Logo } from "./Header.styles"
+
 const Header = ({ siteTite = `` }) => {
   const siteConfig = useSiteConfigQuery()
 
   console.log(siteConfig)
   return (
-    <div>
+    <Wrapper>
       <Link to="/">
-        <img src={siteConfig.logo.publicURL} alt={siteTite} />
+        <Logo src={siteConfig.logo.publicURL} alt={siteTite} />
       </Link>
-    </div>
+    </Wrapper>
   )
 }
 
