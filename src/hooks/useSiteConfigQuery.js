@@ -18,5 +18,5 @@ export const useSiteConfigQuery = () => {
     }
   `)
 
-  return data.markdownRemark.frontMatter
+  return data.markdownRemark.frontmatter
 }

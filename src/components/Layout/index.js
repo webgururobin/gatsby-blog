@@ -1,8 +1,10 @@
 import React from "react"
 import { ThemeProvider } from "styled-components"
 
-//Hooks
+// Components
+import Header from "components/Header"
 
+//Hooks
 import { useMetaDataQuery } from "hooks/useMetaDataQuery"
 
 // Styles
@@ -16,6 +18,7 @@ const Layout = ({ children }) => {
   return (
     <ThemeProvider theme={darkTheme}>
       <GlobalStyles />
+      <Header siteTitle={data.title} />
       Layout Component
       {children}
     </ThemeProvider>
