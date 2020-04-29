@@ -8,6 +8,8 @@ import { useHeroQuery } from "hooks/useHeroQuery"
 
 // Styles
 import BGImage from "components/BGImage"
+import { HeroWrapper, TextWrapper } from "./Hero.styles"
+
 const Hero = () => {
   const {
     heroImage,
@@ -15,18 +17,18 @@ const Hero = () => {
     heroImageBtnText,
     heroImageBtnLink,
   } = useHeroQuery()
-  console.log(heroImage)
+
   return (
-    <div>
+    <HeroWrapper>
       <BGImage title="heroImage" fluid={heroImage.childImageSharp.fluid}>
-        <div>
+        <TextWrapper>
           <h2>{heroImageText}</h2>
           <Link to={heroImageBtnLink}>
             <button>{heroImageBtnText}</button>
           </Link>
-        </div>
+        </TextWrapper>
       </BGImage>
-    </div>
+    </HeroWrapper>
   )
 }
 
