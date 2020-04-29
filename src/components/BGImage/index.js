@@ -1,13 +1,14 @@
 import React from "react"
 
 // Styles
+import { Wrapper, FakeBGImage, Content } from "./BGImage.styles"
 
 const BGImage = ({ fluid, title, className, children }) => {
   return (
-    <div>
-      <div>FakeBG Compoenent</div>
-      <div className={className}>{children}</div>
-    </div>
+    <Wrapper>
+      <FakeBGImage fluid={fluid} title={title} />
+      <Content className={className}>{children}</Content>
+    </Wrapper>
   )
 }
 

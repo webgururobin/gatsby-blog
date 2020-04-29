@@ -5,8 +5,9 @@ import { Link } from "gatsby"
 
 // Hooks
 import { useHeroQuery } from "hooks/useHeroQuery"
-// Styles
 
+// Styles
+import BGImage from "components/BGImage"
 const Hero = () => {
   const {
     heroImage,
@@ -17,15 +18,14 @@ const Hero = () => {
   console.log(heroImage)
   return (
     <div>
-      <div>
-        BG image
+      <BGImage title="heroImage" fluid={heroImage.childImageSharp.fluid}>
         <div>
           <h2>{heroImageText}</h2>
           <Link to={heroImageBtnLink}>
             <button>{heroImageBtnText}</button>
           </Link>
         </div>
-      </div>
+      </BGImage>
     </div>
   )
 }
