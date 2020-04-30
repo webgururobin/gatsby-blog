@@ -52,7 +52,39 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  console.log(content)
+  // If there is any error return out of the function
+  if (content.error) return
+
+  const allPosts = content.data.posts.edges
+  const allPages = content.data.pages.edges
+
+  // Create the individual post pages
+  allPosts.forEach(({ node }) => {
+    if (node.frontmatter.published) {
+      createPage({
+        path: node.fields.slug,
+        component: path.resolve(`./src/templates/Post.js`),
+        context: {
+          // Data passed to context is available
+          // in the page queries as Graphql variables
+          slug: node.fields.slug,
+        },
+      })
+    }
+  })
+
+  // Create the individual pages
+  allPages.forEach(({ node }) => {
+    createPage({
+      path: node.fields.slug,
+      component: path.resolve(`./src/templates/Page.js`),
+      context: {
+        // Data passed to context is available
+        // in the page queries as Graphql variables
+        slug: node.fields.slug,
+      },
+    })
+  })
 }
 
 // For Absolute Imports
