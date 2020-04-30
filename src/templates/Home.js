@@ -7,7 +7,7 @@ import SEO from "components/SEO"
 import Hero from "components/Hero"
 import BlogPostCard from "components/BlogPostCard"
 
-const IndexPage = ({ data }) => {
+const HomeTemplate = ({ data }) => {
   const posts = data.allMarkdownRemark.edges
 
   return (
@@ -16,11 +16,11 @@ const IndexPage = ({ data }) => {
       <Hero />
       <main>
         {posts.map(({ node }, i) => {
-          const title = node.frontmatter.title
+          const title = node.frontmatter.title || "No Title"
           return (
             <BlogPostCard
-              key={i}
-              slug="/"
+              key={node.fields.slug}
+              slug={node.fields.slug}
               title={title}
               date={node.frontmatter.date}
               readingTime={node.fields.readingTime.text}
@@ -34,18 +34,21 @@ const IndexPage = ({ data }) => {
   )
 }
 
-export default IndexPage
+export default HomeTemplate
 
 export const indexQuery = graphql`
-  query blogListQuery {
+  query blogListQuery($skip: Int!, $limit: Int!) {
     allMarkdownRemark(
-      filter: { frontmatter: { type: { eq: "post" } } }
+      limit: $limit
+      skip: $skip
+      filter: { frontmatter: { type: { eq: "post" }, published: { eq: true } } }
       sort: { fields: frontmatter___date, order: DESC }
     ) {
       edges {
         node {
           id
           fields {
+            slug
             readingTime {
               text
             }
